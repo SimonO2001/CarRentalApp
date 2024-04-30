@@ -1,1 +1,6 @@
-<p>vehicles works!</p>
+<h2>Vehicles</h2>
+<ul>
+  <li *ngFor="let vehicle of vehicles">
+    {{ vehicle.make }} {{ vehicle.model }} - {{ vehicle.year }}
+  </li>
+</ul>
