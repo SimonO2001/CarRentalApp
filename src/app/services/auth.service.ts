@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Login } from '../models/login.model';
@@ -8,30 +8,33 @@ import { Login } from '../models/login.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7110/api/Authentication'; // Adjust this URL to where your API is hosted
+  private apiUrl = 'https://localhost:7110/api/Authentication'; // Base API URL
+  
+
 
   constructor(private http: HttpClient) {}
 
   login(credentials: Login): Observable<any> {
-    return this.http.post<any>('https://localhost:7110/api/Authentication/login', credentials, {
+    const loginUrl = 'https://localhost:7110/api/Authentication/login'; // Construct login endpoint URL
+    return this.http.post<any>(loginUrl, credentials, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError) // Handle errors using catchError operator
     );
   }
 
-  private handleError(error: any) {
+  private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An error occurred!';
     if (error.error instanceof ErrorEvent) {
-      // Client-side errors
+      // Client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side errors
+      // Server-side error
       errorMessage = `Error Status: ${error.status}\nMessage: ${error.message}`;
     }
     console.error(errorMessage);
-    return throwError(() => new Error(errorMessage));
+    return throwError(errorMessage); // Propagate error as an observable
   }
 }
