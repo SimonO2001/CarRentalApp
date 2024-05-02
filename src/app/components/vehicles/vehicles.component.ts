@@ -18,7 +18,22 @@ export class VehiclesComponent implements OnInit {
 
   getVehicles(): void {
     this.vehicleService.getVehicles().subscribe(vehicles => {
+      console.log(vehicles);  // Check the structure and data of vehicles
       this.vehicles = vehicles;
     });
   }
+  
+
+  deleteVehicle(id: number): void {
+    if (confirm("Are you sure you want to delete this vehicle?")) {
+      this.vehicleService.deleteVehicle(id).subscribe(() => {
+        alert("Vehicle deleted successfully.");
+        this.getVehicles(); // Refresh the list after deletion
+      }, error => {
+        alert("There was an error deleting the vehicle.");
+        console.error(error);
+      });
+    }
+  }
+  
 }

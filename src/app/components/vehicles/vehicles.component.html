@@ -1,6 +1,39 @@
-<h2>Vehicles</h2>
-<ul>
-  <li *ngFor="let vehicle of vehicles">
-    {{ vehicle.make }} {{ vehicle.model }} - {{ vehicle.year }}
-  </li>
-</ul>
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Vehicles Management</h2>
+  <a class="btn btn-primary mb-3" routerLink="/vehicles/add">Add New Vehicle</a>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th class="text-center">ID</th>
+          <th class="text-center">Type</th>
+          <th class="text-center">Make</th>
+          <th class="text-center">Model</th>
+          <th class="text-center">Year</th>
+          <th class="text-center">VIN</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Current Mileage</th>
+          <th class="text-center">Rental Rate</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicle of vehicles">
+          <td class="text-center">{{ vehicle.id }}</td>
+          <td class="text-center">{{ vehicle.type }}</td>
+          <td class="text-center">{{ vehicle.make }}</td>
+          <td class="text-center">{{ vehicle.model }}</td>
+          <td class="text-center">{{ vehicle.year }}</td>
+          <td class="text-center">{{ vehicle.vin }}</td>
+          <td class="text-center">{{ vehicle.status }}</td>
+          <td class="text-center">{{ vehicle.currentMileage }}</td>
+          <td class="text-center">{{ vehicle.rentalRate | currency }}</td>
+          <td class="text-center">
+            <a class="btn btn-info btn-sm" *ngIf="vehicle.id" routerLink="/vehicles/edit/{{ vehicle.id }}">Edit</a>
+            <button class="btn btn-danger btn-sm" *ngIf="vehicle.id" (click)="deleteVehicle(vehicle.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
