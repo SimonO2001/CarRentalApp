@@ -8,20 +8,20 @@ import { Login } from '../models/login.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7110/api/Authentication'; // Base API URL
   
-
 
   constructor(private http: HttpClient) {}
 
+  private apiUrl = 'https://localhost:7110/Authentication'; // Base API URL
+
   login(credentials: Login): Observable<any> {
-    const loginUrl = 'https://localhost:7110/api/Authentication/login'; // Construct login endpoint URL
+    const loginUrl =  this.apiUrl+'/login'; // Directly specify full login URL
     return this.http.post<any>(loginUrl, credentials, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }).pipe(
-      catchError(this.handleError) // Handle errors using catchError operator
+      catchError(this.handleError)
     );
   }
 

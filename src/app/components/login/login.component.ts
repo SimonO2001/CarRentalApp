@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       password: ['', Validators.required]
     });
   }
@@ -33,13 +33,20 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           console.log('Logged in successfully', response);
           if (response && response.token) {
-            localStorage.setItem('token', response.token);
-            this.router.navigate(['/dashboard']);
+            // Check if token is a valid string before storing
+            if (typeof response.token === 'string') {
+              localStorage.setItem('token', response.token);
+              this.router.navigate(['/dashboard']);
+            } else {
+              console.error('Login failed: Invalid token format');
+              this.errorMessage = 'Login failed due to server error';
+            }
           } else {
             console.error('Login failed: Token not provided in response');
             this.errorMessage = 'Login failed due to server error';
           }
         },
+        
         error: (error) => {
           console.error('Login error', error);
           this.errorMessage = 'Failed to log in, please check your credentials and try again.';

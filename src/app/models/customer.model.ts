@@ -1,9 +1,10 @@
-export class customer {
+export class Customer {
     id?: number;
-    FirstName?: string;
-    LastName?: string;
-    LicenseNumber?: string;
-    Phone?: string;
-    Email?: string;
+    firstName?: string;
+    lastName?: string;
+    licenseNumber?: string;
+    phone?: string;
+    email?: string;
+    password?: string;
 }
   

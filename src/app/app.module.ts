@@ -9,6 +9,7 @@ import { VehiclesComponent } from './components/vehicles/vehicles.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { VehicleEditComponent } from './components/vehicle-edit/vehicle-edit.component';
 import { LoginComponent } from './components/login/login.component';
+import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LoginComponent } from './components/login/login.component';
     VehiclesComponent,
     CustomersComponent,
     VehicleEditComponent,
-    LoginComponent
+    LoginComponent,
+    CustomerEditComponent
   ],
   imports: [
     BrowserModule,
