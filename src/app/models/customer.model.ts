@@ -6,5 +6,6 @@ export class Customer {
     phone?: string;
     email?: string;
     password?: string;
+    role?: string;
 }
   

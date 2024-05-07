@@ -6,7 +6,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/dashboard">Dashboard</a>
         </li>
@@ -17,6 +17,9 @@
           <a class="nav-link" routerLink="/customers">Customers</a>
         </li>
       </ul>
+      <span class="navbar-text">
+        {{ currentUser?.decoded?.email }} ({{ currentUser?.decoded?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] }})
+      </span>
     </div>
   </div>
 </nav>

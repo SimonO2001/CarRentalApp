@@ -25,7 +25,11 @@
         <div class="col-md-6 mb-3">
             <label for="Email" class="form-label">Password</label>
             <input type="text" class="form-control" id="password" formControlName="password" placeholder="Enter Password">
-          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="Role" class="form-label">Role</label>
+          <input type="role" class="form-control" id="role" formControlName="role" placeholder="Enter role">
+        </div>
       </div>
       <button type="submit" class="btn btn-primary">{{ customerId ? 'Update' : 'Add' }}</button>
     </form>

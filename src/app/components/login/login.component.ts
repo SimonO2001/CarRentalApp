@@ -1,8 +1,7 @@
-// src/app/components/login/login.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router'; // Import Router for navigation
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,40 +15,31 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router // Inject Router for navigation
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
 
+  // In LoginComponent
   onLogin() {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.login({ email, password }).subscribe({
+      this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
-          console.log('Logged in successfully', response);
-          if (response && response.token) {
-            // Check if token is a valid string before storing
-            if (typeof response.token === 'string') {
-              localStorage.setItem('token', response.token);
-              this.router.navigate(['/dashboard']);
-            } else {
-              console.error('Login failed: Invalid token format');
-              this.errorMessage = 'Login failed due to server error';
-            }
-          } else {
-            console.error('Login failed: Token not provided in response');
-            this.errorMessage = 'Login failed due to server error';
-          }
+          console.log('Attempting to navigate to dashboard');
+          this.router.navigate(['/dashboard']).then(success => {
+            console.log('Navigation success:', success);
+          }).catch(err => {
+            console.log('Navigation error:', err);
+          });
         },
-        
         error: (error) => {
-          console.error('Login error', error);
-          this.errorMessage = 'Failed to log in, please check your credentials and try again.';
+          this.errorMessage = error.error.message || 'Failed to log in, please check your credentials and try again.';
+          console.error('Login error:', error);
         }
       });
     } else {

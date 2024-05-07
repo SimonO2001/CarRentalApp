@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerService } from '../services/customer.service';
-import { Customer } from '../models/customer.model';
+import { Customer } from '../../models/customer.model';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-customer-edit',
@@ -28,6 +28,7 @@ export class CustomerEditComponent implements OnInit {
       phone: [''],
       email: [''],
       password: [''],
+      role: [''],
     });
 
     const id = this.route.snapshot.params['id'];
