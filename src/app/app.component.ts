@@ -8,11 +8,17 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'CarRentalApp'; // Define the title property
-  constructor(public authService: AuthService) {}
 
-  get currentUser() {
-    return this.authService.getCurrentUser();
+
+export class AppComponent {
+  isAdmin: boolean = false;
+  isScrolled: boolean = false; // Add this property
+  currentUser: any; // Add this property
+  title = 'CarRentalApp'; // Define the title property
+  constructor(private authService: AuthService) {
+    this.authService.currentUser.subscribe(user => {
+      this.currentUser = user; // Update the currentUser property
+      this.isAdmin = this.authService.hasRole('Admin');
+    });
   }
 }

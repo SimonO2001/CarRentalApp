@@ -10,6 +10,7 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { VehicleEditComponent } from './components/vehicle-edit/vehicle-edit.component';
 import { LoginComponent } from './components/login/login.component';
 import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CustomerEditComponent } from './components/customer-edit/customer-edit.
     CustomersComponent,
     VehicleEditComponent,
     LoginComponent,
-    CustomerEditComponent
+    CustomerEditComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

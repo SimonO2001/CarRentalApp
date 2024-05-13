@@ -1,40 +1,44 @@
 <div class="container mt-5">
-    <h2 class="mb-4">{{ vehicleId ? 'Edit Vehicle' : 'Add Vehicle' }}</h2>
-    <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
-        <div class="row">
+  <h2 class="mb-4">{{ vehicleId ? 'Edit Vehicle' : 'Add Vehicle' }}</h2>
+  <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+      <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="type" class="form-label">Type</label>
-            <input type="text" class="form-control" id="type" formControlName="type" required placeholder="Enter vehicle type (e.g., Sedan, SUV)">
+              <label for="type" class="form-label">Type</label>
+              <input type="text" class="form-control" id="type" formControlName="type" required placeholder="Enter vehicle type (e.g., Sedan, SUV)">
           </div>
           <div class="col-md-6 mb-3">
-            <label for="make" class="form-label">Make</label>
-            <input type="text" class="form-control" id="make" formControlName="make" required placeholder="Enter make (e.g., Toyota)">
+              <label for="make" class="form-label">Make</label>
+              <input type="text" class="form-control" id="make" formControlName="make" required placeholder="Enter make (e.g., Toyota)">
           </div>
           <div class="col-md-6 mb-3">
-            <label for="model" class="form-label">Model</label>
-            <input type="text" class="form-control" id="model" formControlName="model" required placeholder="Enter model (e.g., Camry)">
+              <label for="model" class="form-label">Model</label>
+              <input type="text" class="form-control" id="model" formControlName="model" required placeholder="Enter model (e.g., Camry)">
           </div>
           <div class="col-md-6 mb-3">
-            <label for="year" class="form-label">Year</label>
-            <input type="number" class="form-control" id="year" formControlName="year" required placeholder="Enter year (e.g., 2021)">
+              <label for="year" class="form-label">Year</label>
+              <input type="number" class="form-control" id="year" formControlName="year" required placeholder="Enter year (e.g., 2021)">
           </div>
           <div class="col-md-6 mb-3">
-            <label for="vin" class="form-label">VIN</label>
-            <input type="text" class="form-control" id="vin" formControlName="vin" placeholder="Enter VIN number">
+              <label for="vin" class="form-label">VIN</label>
+              <input type="text" class="form-control" id="vin" formControlName="vin" placeholder="Enter VIN number">
           </div>
           <div class="col-md-6 mb-3">
-            <label for="status" class="form-label">Status</label>
-            <input type="text" class="form-control" id="status" formControlName="status" placeholder="Enter status (e.g., Available, Maintenance)">
+              <label for="status" class="form-label">Status</label>
+              <input type="text" class="form-control" id="status" formControlName="status" placeholder="Enter status (e.g., Available, Maintenance)">
           </div>
           <div class="col-md-6 mb-3">
-            <label for="currentMileage" class="form-label">Current Mileage</label>
-            <input type="number" class="form-control" id="currentMileage" formControlName="currentMileage" placeholder="Enter current mileage">
+              <label for="currentMileage" class="form-label">Current Mileage</label>
+              <input type="number" class="form-control" id="currentMileage" formControlName="currentMileage" placeholder="Enter current mileage">
           </div>
           <div class="col-md-6 mb-3">
-            <label for="rentalRate" class="form-label">Rental Rate</label>
-            <input type="number" class="form-control" id="rentalRate" formControlName="rentalRate" placeholder="Enter rental rate">
+              <label for="rentalRate" class="form-label">Rental Rate</label>
+              <input type="number" class="form-control" id="rentalRate" formControlName="rentalRate" placeholder="Enter rental rate">
           </div>
-        </div>
-        <button type="submit" class="btn btn-primary">{{ vehicleId ? 'Update' : 'Add' }}</button>
-    </form>
+          <div class="col-md-6 mb-3">
+              <label for="file" class="form-label">Vehicle Image</label>
+              <input type="file" class="form-control" id="file" (change)="onFileSelected($event)">
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary">{{ vehicleId ? 'Update' : 'Add' }}</button>
+  </form>
 </div>

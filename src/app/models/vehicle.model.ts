@@ -8,5 +8,6 @@ export class Vehicle {
     status?: string;
     currentMileage?: number;
     rentalRate?: number;
+    imageUrl?: string;
   }
   

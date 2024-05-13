@@ -1,0 +1,78 @@
+.intro-gif {
+    background-image: url('/assets/bently.mp4');
+    height: 300px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .intro-text {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .card {
+    background-color: #222;  
+    color: white;            
+    border: none;
+  }
+  
+  .card img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    background-color: #333;  
+  }
+  
+  .card-title, .card-text {
+    color: white;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .spinner-border {
+    color: white;
+  }
+  
+  .alert-danger {
+    background-color: #721c24;
+    color: white;
+  }
+  .intro-video {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Ensure the video takes up the full viewport height */
+    overflow: hidden; /* Hide overflowing content */
+}
+
+.intro-video video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the video covers the entire container */
+}
+
+.intro-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1; /* Ensure text appears above the video */
+}
