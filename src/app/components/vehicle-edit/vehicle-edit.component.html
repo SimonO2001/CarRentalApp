@@ -35,6 +35,14 @@
               <input type="number" class="form-control" id="rentalRate" formControlName="rentalRate" placeholder="Enter rental rate">
           </div>
           <div class="col-md-6 mb-3">
+            <label for="rentalRate" class="form-label">Horsepower</label>
+            <input type="number" class="form-control" id="horsePower" formControlName="horsePower" placeholder="Enter HP">
+         </div>
+         <div class="col-md-6 mb-3">
+            <label for="rentalRate" class="form-label">Torque</label>
+            <input type="number" class="form-control" id="torque" formControlName="torque" placeholder="Enter Nm">
+         </div>
+          <div class="col-md-6 mb-3">
               <label for="file" class="form-label">Vehicle Image</label>
               <input type="file" class="form-control" id="file" (change)="onFileSelected($event)">
           </div>

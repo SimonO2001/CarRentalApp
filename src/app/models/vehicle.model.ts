@@ -9,5 +9,7 @@ export class Vehicle {
     currentMileage?: number;
     rentalRate?: number;
     imageUrl?: string;
+    horsePower?: number;
+    torque?: number;
   }
   

@@ -1,6 +1,4 @@
-// src/app/app.component.ts
-
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -8,17 +6,21 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
-
-export class AppComponent {
+export class AppComponent implements OnInit {
   isAdmin: boolean = false;
-  isScrolled: boolean = false; // Add this property
-  currentUser: any; // Add this property
-  title = 'CarRentalApp'; // Define the title property
+  
+  currentUser: any;
+
   constructor(private authService: AuthService) {
     this.authService.currentUser.subscribe(user => {
-      this.currentUser = user; // Update the currentUser property
+      this.currentUser = user;
       this.isAdmin = this.authService.hasRole('Admin');
     });
   }
+
+  ngOnInit() {
+    
+  }
+
+  
 }

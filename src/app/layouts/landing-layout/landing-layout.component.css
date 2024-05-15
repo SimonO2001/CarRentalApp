@@ -1,0 +1,204 @@
+/* General navbar styles */
+.navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.5s ease, visibility 0.5s, background-color 0.5s ease;
+    opacity: 0;
+    visibility: hidden;
+    background-color: transparent;
+}
+
+/* Navbar expanded */
+.navbar-expanded {
+    background-color: #000000 !important; /* Slightly lighter than pure black for a modern feel */
+}
+
+/* Transparent when not expanded */
+.navbar:not(.navbar-expanded) {
+    background-color: transparent !important;
+}
+
+.navbar-brand, .navbar-nav .nav-link, .navbar-text {
+    transition: color 0.3s ease;
+}
+
+/* Center the logo and increase its size */
+.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 80px;
+    filter: brightness(0) invert(1);
+}
+
+/* Ensure text and logo are visible when navbar is transparent */
+.navbar:not(.navbar-expanded) .navbar-brand img,
+.navbar:not(.navbar-expanded) .navbar-nav .nav-link,
+.navbar:not(.navbar-expanded) .navbar-text {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* White text when navbar is expanded */
+.navbar-expanded .navbar-brand,
+.navbar-expanded .navbar-nav .nav-link,
+.navbar-expanded .navbar-text {
+    color: #fff;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1); /* White toggler icon */
+}
+
+/* Show navbar after scrolling 10% of the viewport height */
+.navbar-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Solid background when navbar is visible */
+.navbar-visible.navbar:not(.navbar-expanded) {
+    background-color: #0f0f0f !important;
+    opacity: 0.9;
+}
+
+/* Additional styles for matching the main navbar */
+.navbar-left, .navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin: 0 10px;
+  position: relative;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 5px 0;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: red;
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+}
+
+.nav-item span {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.user-email {
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+}
+
+.bi-box-arrow-right, .bi-person-circle {
+  margin-right: 3px;
+  font-size: 1.2em;
+}
+
+.footer {
+  background-color: #0f0f0f;
+  color: white;
+  padding: 20px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo {
+  height: 80px;
+  filter: brightness(0) invert(1);
+  margin-right: 20px;
+}
+
+.social-media-rectangle {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80px; /* Ensures the social icons fit within the height of the logo */
+}
+
+.social-icon {
+  margin: 5px;
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  color: #ddd;
+}
+
+.footer-middle {
+  text-align: center;
+  flex: 1;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-info p {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.footer-icon {
+  margin-right: 5px;
+  vertical-align: middle;
+}

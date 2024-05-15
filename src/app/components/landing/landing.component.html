@@ -1,38 +1,41 @@
 <!-- Introductory Video Section -->
 <div class="intro-video">
-    <video autoplay loop muted playsinline>
-        <source src="/assets/bently.mp4" type="video/mp4">
-        <!-- Add additional video sources if needed for different formats -->
-        Your browser does not support the video tag.
-    </video>
-    <div class="intro-text">
-      <h1>Welcome to Oksens Dealership</h1>
-    </div>
+  <video autoplay loop muted playsinline>
+    <source src="/assets/bently.mp4" type="video/mp4">
+  </video>
+  <div class="intro-text">
+    <h1>
+      <span>Welcome to</span><br>
+      <span id="dynamic-text">{{ displayText }}</span>
+    </h1>
+  </div>
+  <!-- Scroll Down Indicator -->
+  <div class="scroll-down">
+    <span>⬇</span>
+  </div>
 </div>
 
-  
-  <!-- Featured Vehicles Section -->
-  <div class="container mt-5">
-    <h2 class="mb-4 text-white">Featured Vehicles</h2>
-    <div *ngIf="isLoading" class="spinner-border text-white" role="status">
-      <span class="sr-only">Loading...</span>
+<!-- Additional Videos Section -->
+<!-- Additional Videos Section -->
+<div class="additional-videos">
+  <div class="video vertical-video" (click)="navigateToShowroom()"> <!-- Entire video clickable -->
+    <video autoplay loop muted playsinline>
+      <source src="/assets/showroom_fir.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay">Showroom<span class="underline"></span></div>
+  </div>
+  <div class="horizontal-videos">
+    <div class="video horizontal-video" (click)="navigateToAboutUs()"> <!-- Entire video clickable -->
+      <video autoplay loop muted playsinline>
+        <source src="/assets/bently_hori1.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay">About Us<span class="underline"></span></div>
     </div>
-    <div *ngIf="error" class="alert alert-danger">
-      {{ error }}
-    </div>
-    <div class="row">
-      <div *ngFor="let vehicle of vehicles" class="col-md-4 mb-4">
-        <div class="card">
-          <img *ngIf="vehicle.imageUrl" [src]="vehicle.imageUrl" class="card-img-top" alt="{{ vehicle.make }} {{ vehicle.model }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ vehicle.make }} {{ vehicle.model }}</h5>
-            <p class="card-text">Year: {{ vehicle.year }}</p>
-            <p class="card-text">Type: {{ vehicle.type }}</p>
-            <p class="card-text">Rental Rate: {{ vehicle.rentalRate | currency }}</p>
-            <a [routerLink]="['/vehicles', vehicle.id]" class="btn btn-primary">View Details</a>
-          </div>
-        </div>
-      </div>
+    <div class="video horizontal-video" (click)="navigateToEvents()"> <!-- Entire video clickable -->
+      <video autoplay loop muted playsinline>
+        <source src="/assets/event_hori.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay">Events<span class="underline"></span></div>
     </div>
   </div>
-  
+</div>

@@ -24,10 +24,9 @@ export class VehicleService {
     return this.http.post<Vehicle>(this.apiUrl, vehicleData);
   }
 
-  updateVehicle(vehicleData: FormData, id: number): Observable<any> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.put(url, vehicleData);
-  }
+  updateVehicle(vehicleId: number, vehicleData: FormData): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${vehicleId}`, vehicleData);
+}
 
   deleteVehicle(id: number): Observable<Vehicle> {
     const url = `${this.apiUrl}/${id}`;

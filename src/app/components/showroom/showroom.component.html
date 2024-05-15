@@ -1,0 +1,30 @@
+<div class="showroom-container">
+    <div class="video-overlay"></div> <!-- Black overlay -->
+    <h1 class="showroom-title">Showroom</h1> <!-- Title on top of overlay -->
+    <div class="videos-container">
+        <div class="stacked-videos">
+            <video autoplay loop muted playsinline class="video-bw">
+                <source src="/assets/show_vid1.mp4" type="video/mp4">
+            </video>
+            <video autoplay loop muted playsinline class="video-bw">
+                <source src="/assets/show_vid2.mp4" type="video/mp4">
+            </video>
+        </div>
+        <video autoplay loop muted playsinline class="video-bw side-video">
+            <source src="/assets/show_vid3.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+<div class="vehicle-list">
+    <div *ngFor="let vehicle of vehicles" class="vehicle-card">
+        <img [src]="vehicle.imageUrl" alt="Vehicle image">
+        <div class="vehicle-details">
+            <h3>{{ vehicle.make }} {{ vehicle.model }}</h3>
+            <p>Year: {{ vehicle.year }}</p>
+            <p>Type: {{ vehicle.type }}</p>
+            <p>Mileage: {{ vehicle.currentMileage }} miles</p>
+            <p>Rental Rate: ${{ vehicle.rentalRate }}</p>
+            <button routerLink="/vehicles/details/{{ vehicle.id }}">View More Details</button>
+        </div>
+    </div>
+</div>

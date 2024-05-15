@@ -15,6 +15,3 @@ body {
 }
 
 /* Ensure that every content container is transparent to show the black background */
-.container, .card, .card-body, .alert, .spinner-border {
-  background: transparent;
-}

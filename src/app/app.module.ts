@@ -11,6 +11,11 @@ import { VehicleEditComponent } from './components/vehicle-edit/vehicle-edit.com
 import { LoginComponent } from './components/login/login.component';
 import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { LandingLayoutComponent } from './layouts/landing-layout/landing-layout.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ShowroomComponent } from './components/showroom/showroom.component';
+import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,12 @@ import { LandingComponent } from './components/landing/landing.component';
     VehicleEditComponent,
     LoginComponent,
     CustomerEditComponent,
-    LandingComponent
+    LandingComponent,
+    LandingLayoutComponent,
+    MainLayoutComponent,
+    AdminLayoutComponent,
+    ShowroomComponent,
+    VehicleDetailsComponent,
   ],
   imports: [
     BrowserModule,

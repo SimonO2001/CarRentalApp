@@ -1,0 +1,56 @@
+.vehicle-details-container {
+    color: white;
+    background-color: #333;
+    padding: 20px;
+    
+    min-height: 100vh; /* Ensures container fills the viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+}
+
+.vehicle-image {
+    width: 80%;
+    max-width: 600px;
+    height: 400px;  /* Fixed height to maintain a uniform appearance */
+    object-fit: contain;  /* Ensures the entire image is visible */
+    display: block;
+    margin: 20px auto;  /* Centers the image and adds margin */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    border: 5px solid #444;
+    background-color: #000; /* Adds a black background to handle letterboxing */
+}
+
+
+.vehicle-info {
+    background-color: #222; /* Darker background for details */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Adds shadow for depth */
+    width: 80%;
+    max-width: 600px;
+}
+
+.vehicle-info h2 {
+    font-size: 28px; /* Larger font size for the heading */
+    margin-bottom: 15px; /* More space below the heading */
+}
+
+.vehicle-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Removes default margin */
+}
+
+.vehicle-info li {
+    margin-bottom: 10px; /* Increased space between items */
+    font-size: 16px; /* Larger font size for readability */
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+    .vehicle-image, .vehicle-info {
+        width: 95%; /* Full width on smaller screens */
+    }
+}
