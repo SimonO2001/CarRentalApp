@@ -1,21 +1,43 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Vehicle } from '../../models/vehicle.model';
+import { VehicleService } from '../../services/vehicle.service';
 
-import { VehicleDetailsComponent } from './vehicle-details.component';
+@Component({
+  selector: 'app-vehicle-details',
+  templateUrl: './vehicle-details.component.html',
+  styleUrls: ['./vehicle-details.component.css']
+})
+export class VehicleDetailsComponent implements OnInit {
+  vehicle: Vehicle | undefined;
 
-describe('VehicleDetailsComponent', () => {
-  let component: VehicleDetailsComponent;
-  let fixture: ComponentFixture<VehicleDetailsComponent>;
+  constructor(
+    private vehicleService: VehicleService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [VehicleDetailsComponent]
+  ngOnInit(): void {
+    this.getVehicleDetails();
+  }
+
+  getVehicleDetails(): void {
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    this.vehicleService.getVehicle(id).subscribe({
+      next: (vehicle) => this.vehicle = vehicle,
+      error: (err) => console.error('Failed to get vehicle details:', err)
     });
-    fixture = TestBed.createComponent(VehicleDetailsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  navigateToAddInsurance(): void {
+    if (this.vehicle) {
+      this.router.navigate(['/insurance/create']);
+    }
+  }
+
+  navigateToRentalForm(): void {
+    if (this.vehicle) {
+      this.router.navigate(['/rental-contract/create', this.vehicle.id]);
+    }
+  }
+}

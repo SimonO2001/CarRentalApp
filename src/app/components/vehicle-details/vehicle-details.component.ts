@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Vehicle } from '../../models/vehicle.model';
 import { VehicleService } from '../../services/vehicle.service';
 
@@ -9,11 +9,12 @@ import { VehicleService } from '../../services/vehicle.service';
   styleUrls: ['./vehicle-details.component.css']
 })
 export class VehicleDetailsComponent implements OnInit {
-  vehicle: Vehicle | undefined;
+  vehicle: Vehicle | null = null;
 
   constructor(
     private vehicleService: VehicleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,5 +27,11 @@ export class VehicleDetailsComponent implements OnInit {
       next: (vehicle) => this.vehicle = vehicle,
       error: (err) => console.error('Failed to get vehicle details:', err)
     });
+  }
+
+  navigateToRentalForm(): void {
+    if (this.vehicle) {
+      this.router.navigate(['/rental-contracts/add'], { queryParams: { vehicleId: this.vehicle.id } });
+    }
   }
 }

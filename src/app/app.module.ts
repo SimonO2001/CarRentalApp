@@ -16,6 +16,10 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ShowroomComponent } from './components/showroom/showroom.component';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
+import { InsuranceFormComponent } from './components/insurance-form/insurance-form.component';
+import { RentalContractComponent } from './components/rental-contract/rental-contract.component';
+import { InsuranceComponent } from './components/insurance/insurance.component';
+import { RentalContractEditComponent } from './components/rental-contract-edit/rental-contract-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,10 @@ import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-de
     AdminLayoutComponent,
     ShowroomComponent,
     VehicleDetailsComponent,
+    InsuranceFormComponent,
+    RentalContractComponent,
+    InsuranceComponent,
+    RentalContractEditComponent,
   ],
   imports: [
     BrowserModule,

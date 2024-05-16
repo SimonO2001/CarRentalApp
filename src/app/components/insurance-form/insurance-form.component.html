@@ -1,0 +1,23 @@
+<div class="container mt-5" style="min-height: 100vh;">
+    <h2 class="mb-4 text-center">{{ isEditMode ? 'Edit Insurance' : 'Add Insurance' }}</h2>
+    <form [formGroup]="insuranceForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-3">
+        <label for="provider" class="form-label">Provider</label>
+        <input id="provider" formControlName="provider" type="text" class="form-control" placeholder="Enter provider">
+      </div>
+      <div class="form-group mb-3">
+        <label for="policyNumber" class="form-label">Policy Number</label>
+        <input id="policyNumber" formControlName="policyNumber" type="text" class="form-control" placeholder="Enter policy number">
+      </div>
+      <div class="form-group mb-3">
+        <label for="coverage" class="form-label">Coverage</label>
+        <input id="coverage" formControlName="coverage" type="text" class="form-control" placeholder="Enter coverage">
+      </div>
+      <div class="form-group mb-3">
+        <label for="costADay" class="form-label">Cost A Day</label>
+        <input id="costADay" formControlName="costADay" type="number" class="form-control" placeholder="Enter cost per day">
+      </div>
+      <button type="submit" class="btn btn-primary w-100">{{ isEditMode ? 'Update' : 'Add' }} Insurance</button>
+    </form>
+  </div>
+  

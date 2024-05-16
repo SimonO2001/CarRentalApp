@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Rental Contracts Management</h2>
+    <a class="btn btn-primary mb-3" routerLink="/rental-contracts/add">Add New Rental Contract</a>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Vehicle</th>
+            <th class="text-center">Customer</th>
+            <th class="text-center">Insurance</th>
+            <th class="text-center">Start Date</th>
+            <th class="text-center">End Date</th>
+            <th class="text-center">Total Cost</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rentalContract of rentalContracts">
+            <td class="text-center">{{ rentalContract.id }}</td>
+            <td class="text-center">{{ rentalContract.vehicle?.make }} {{ rentalContract.vehicle?.model }}</td>
+            <td class="text-center">{{ rentalContract.customer?.firstName }} {{ rentalContract.customer?.lastName }}</td>
+            <td class="text-center">{{ rentalContract.insurance?.provider }}</td>
+            <td class="text-center">{{ rentalContract.startDate | date }}</td>
+            <td class="text-center">{{ rentalContract.endDate | date }}</td>
+            <td class="text-center">{{ rentalContract.totalCost | currency }}</td>
+            <td class="text-center">
+              <a class="btn btn-info btn-sm" *ngIf="rentalContract.id" routerLink="/rental-contracts/edit/{{ rentalContract.id }}">Edit</a>
+              <button class="btn btn-danger btn-sm" *ngIf="rentalContract.id" (click)="deleteRentalContract(rentalContract.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

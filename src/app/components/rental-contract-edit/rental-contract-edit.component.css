@@ -1,0 +1,73 @@
+/* Ensure the entire body has a background color of #333 and remove any default margin or padding */
+body {
+    background-color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll due to margin/padding issues */
+}
+
+html {
+    height: 100%;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0; /* Remove any margin from container-fluid */
+    background-color: #333;
+}
+
+.content-wrapper {
+    max-width: 1000px; /* Increase the max width */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card-img {
+    object-fit: cover;
+    height: 100%; /* Adjust height as needed */
+    max-height: 400px; /* Limit the maximum height */
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+}
+
+.card-title i {
+    margin-right: 10px;
+}
+
+.card-text i {
+    margin-right: 5px;
+}
+
+.form-label i {
+    margin-right: 5px;
+}
+
+.form-control.bg-dark {
+    background-color: #343a40 !important;
+    color: #ffffff !important;
+}
+
+option {
+    background-color: #343a40 !important;
+    color: #ffffff !important;
+}
+
+h2 {
+    padding-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.card-body p {
+    margin-bottom: 10px;
+}
+
+hr {
+    border-top: 1px solid #ffffff;
+}

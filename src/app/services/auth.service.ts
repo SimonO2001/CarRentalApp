@@ -4,6 +4,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Login } from '../models/login.model';
 import { jwtDecode } from 'jwt-decode';
+import { Customer } from '../models/customer.model';
 
 
 @Injectable({
@@ -30,31 +31,27 @@ export class AuthService {
     }).pipe(
       map(response => {
         console.log('Login response:', response);
-        const decodedToken = jwtDecode(response.token);  // Use the imported jwtDecode
+        const decodedToken = jwtDecode(response.token);
         console.log('Decoded Token:', decodedToken);
-        
+
         localStorage.setItem('currentUser', JSON.stringify({ token: response.token, decoded: decodedToken }));
         this.currentUserSubject.next({ token: response.token, decoded: decodedToken });
-    
+
         return response;
       }),
       catchError(this.handleError)
     );
   }
-  
 
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
 
-  // src/app/services/auth.service.ts
-
   public getCurrentUser(): any {
     const user = localStorage.getItem('currentUser');
     return user ? JSON.parse(user) : null;
   }
-
 
   getToken(): string {
     const currentUser = this.currentUserSubject.value;
@@ -80,5 +77,22 @@ export class AuthService {
     }
     console.error(errorMessage);
     return throwError(errorMessage);
+  }
+
+  getUserId(): number | null {
+    const currentUser = this.getCurrentUser();
+    return currentUser && currentUser.decoded && currentUser.decoded.userId ? currentUser.decoded.userId : null;
+  }
+
+  getCustomer(id: number): Observable<any> {
+    return this.http.get<any>(`https://localhost:7110/api/Customer/${id}`, { headers: this.getHeaders() });
+  }
+
+  private getHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
   }
 }

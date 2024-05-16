@@ -1,0 +1,32 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Insurance Management</h2>
+    <a class="btn btn-primary mb-3" routerLink="/insurances/add">Add New Insurance</a>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Provider</th>
+            <th class="text-center">Policy Number</th>
+            <th class="text-center">Coverage</th>
+            <th class="text-center">Cost per Day</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let insurance of insurances">
+            <td class="text-center">{{ insurance.id }}</td>
+            <td class="text-center">{{ insurance.provider }}</td>
+            <td class="text-center">{{ insurance.policyNumber }}</td>
+            <td class="text-center">{{ insurance.coverage }}</td>
+            <td class="text-center">{{ insurance.costADay | currency }}</td>
+            <td class="text-center">
+              <a class="btn btn-info btn-sm" *ngIf="insurance.id" routerLink="/insurances/edit/{{ insurance.id }}">Edit</a>
+              <button class="btn btn-danger btn-sm" *ngIf="insurance.id" (click)="deleteInsurance(insurance.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

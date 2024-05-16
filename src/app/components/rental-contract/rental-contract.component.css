@@ -1,0 +1,20 @@
+.table th, .table td {
+    vertical-align: middle; /* Center content vertically */
+}
+
+.thead-dark th {
+    background-color: #343a40; /* Dark header background */
+    color: #fff; /* White text color */
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #dee2e6; /* Border for table cells */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05); /* Zebra-striping for table */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05) !important; /* Ensure it applies */
+}

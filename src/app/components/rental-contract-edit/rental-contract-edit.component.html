@@ -1,0 +1,68 @@
+<div class="container-fluid p-0 m-0" style="background-color: #333; min-height: 100vh;">
+    <div class="content-wrapper">
+        <h2 class="mb-4 text-center text-light">{{ rentalContractId ? 'Edit Rental Contract' : 'Create Rental Contract' }}</h2>
+        <form [formGroup]="rentalContractForm" (ngSubmit)="onSubmit()">
+            <div class="card mb-4 bg-dark text-light">
+                <div class="row no-gutters">
+                    <div class="col-md-6" *ngIf="vehicle && vehicle.imageUrl">
+                        <img [src]="vehicle.imageUrl" class="card-img" alt="Vehicle Image">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-info-circle"></i> Vehicle Details</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="card-text"><i class="fas fa-car"></i> <strong>Make:</strong> {{ vehicle?.make }}</p>
+                                    <hr>
+                                    <p class="card-text"><i class="fas fa-car-side"></i> <strong>Model:</strong> {{ vehicle?.model }}</p>
+                                    <hr>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-text"><i class="fas fa-horse"></i> <strong>Horsepower:</strong> {{ vehicle?.horsePower }}</p>
+                                    <hr>
+                                    <p class="card-text"><i class="fas fa-cogs"></i> <strong>Torque:</strong> {{ vehicle?.torque }}</p>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="card-text"><i class="fas fa-calendar"></i> <strong>Year:</strong> {{ vehicle?.year }}</p>
+                                    <hr>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-text"><i class="fas fa-tachometer-alt"></i> <strong>Mileage:</strong> {{ vehicle?.currentMileage }} miles</p>
+                                    <hr>
+                                </div>
+                            </div>
+                            <p class="card-text"><i class="fas fa-dollar-sign"></i> <strong>Rental Rate:</strong> ${{ vehicle?.rentalRate }} per day</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="form-group mb-3">
+                <label for="insuranceId" class="form-label text-light"><i class="fas fa-shield-alt"></i> Insurance</label>
+                <select id="insuranceId" formControlName="insuranceId" class="form-control bg-dark text-light" (change)="calculateTotalCost()">
+                    <option *ngFor="let insurance of insurances" [value]="insurance.id">{{ insurance.provider }} - ${{ insurance.costADay }} per day</option>
+                </select>
+            </div>
+        
+            <div class="form-group mb-3">
+                <label for="startDate" class="form-label text-light"><i class="fas fa-calendar-alt"></i> Start Date</label>
+                <input id="startDate" formControlName="startDate" type="date" class="form-control bg-dark text-light" (change)="calculateTotalCost()">
+            </div>
+        
+            <div class="form-group mb-3">
+                <label for="endDate" class="form-label text-light"><i class="fas fa-calendar-alt"></i> End Date</label>
+                <input id="endDate" formControlName="endDate" type="date" class="form-control bg-dark text-light" (change)="calculateTotalCost()">
+            </div>
+        
+            <div class="form-group mb-3">
+                <label for="totalCost" class="form-label text-light"><i class="fas fa-dollar-sign"></i> Total Cost</label>
+                <input id="totalCost" formControlName="totalCost" type="number" class="form-control bg-dark text-light" readonly>
+            </div>
+        
+            <button type="submit" class="btn btn-primary w-100">{{ rentalContractId ? 'Update' : 'Submit' }} Rental Contract</button>
+        </form>
+    </div>
+</div>

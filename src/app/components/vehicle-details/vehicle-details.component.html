@@ -1,15 +1,16 @@
 <div *ngIf="vehicle" class="vehicle-details-container">
-    <img [src]="vehicle.imageUrl" alt="Vehicle Image" class="vehicle-image"
-         onerror="this.src='/path-to-default-image/default-image.jpg';">
-    <div class="vehicle-info">
-      <h2>{{ vehicle.make }} {{ vehicle.model }}</h2>
-      <ul>
-        <li>Year: {{ vehicle.year }}</li>
-        <li>Type: {{ vehicle.type }}</li>
-        <li>VIN: {{ vehicle.vin }}</li>
-        <li>Status: {{ vehicle.status }}</li>
-        <li>Current Mileage: {{ vehicle.currentMileage }} miles</li>
-        <li>Rental Rate: ${{ vehicle.rentalRate }}</li>
-      </ul>
-    </div>
+  <img [src]="vehicle?.imageUrl" alt="Vehicle Image" class="vehicle-image"
+       onerror="this.src='/path-to-default-image/default-image.jpg';">
+  <div class="vehicle-info">
+    <h2>{{ vehicle?.make }} {{ vehicle?.model }}</h2>
+    <ul>
+      <li>Year: {{ vehicle?.year }}</li>
+      <li>Type: {{ vehicle?.type }}</li>
+      <li>VIN: {{ vehicle?.vin }}</li>
+      <li>Status: {{ vehicle?.status }}</li>
+      <li>Current Mileage: {{ vehicle?.currentMileage }} miles</li>
+      <li>Rental Rate: ${{ vehicle?.rentalRate }}</li>
+    </ul>
+    <button (click)="navigateToRentalForm()">Start Rental Contract</button>
   </div>
+</div>
