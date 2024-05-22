@@ -16,10 +16,10 @@ import { RentalContract } from '../../models/rental-contract.model';
   styleUrls: ['./rental-contract-edit.component.css']
 })
 export class RentalContractEditComponent implements OnInit {
-  rentalContractForm: FormGroup;
-  rentalContractId: number | null = null;
-  insurances: Insurance[] = [];
-  vehicle: Vehicle | null = null;
+  rentalContractForm: FormGroup; // Form group for the rental contract
+  rentalContractId: number | null = null; // ID of the rental contract being edited
+  insurances: Insurance[] = []; // List of available insurances
+  vehicle: Vehicle | null = null; // The vehicle related to the rental contract
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +30,7 @@ export class RentalContractEditComponent implements OnInit {
     private insuranceService: InsuranceService,
     private vehicleService: VehicleService
   ) {
+    // Initialize the form group with controls and validators
     this.rentalContractForm = this.fb.group({
       vehicleId: ['', Validators.required],
       customerId: ['', Validators.required],
@@ -41,15 +42,21 @@ export class RentalContractEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Get the rental contract ID from the route parameters
     this.rentalContractId = this.route.snapshot.paramMap.get('id') ? +this.route.snapshot.paramMap.get('id')! : null;
     const vehicleId = +this.route.snapshot.queryParamMap.get('vehicleId')!;
     console.log('Vehicle ID from URL:', vehicleId);
+
+    // Load the vehicle details
     this.loadVehicle(vehicleId);
+    // Load the available insurances
     this.loadInsurances();
   
+    // If editing an existing rental contract, load its details
     if (this.rentalContractId) {
       this.loadRentalContract();
     } else {
+      // If creating a new rental contract, set the customer ID and vehicle ID
       const customerId = this.authService.getUserId();
       console.log('Customer ID:', customerId); // Log customer ID
       if (customerId !== null) {
@@ -60,12 +67,14 @@ export class RentalContractEditComponent implements OnInit {
       }
     }
   
+    // Recalculate the total cost when any of these form controls change
     this.rentalContractForm.get('startDate')?.valueChanges.subscribe(() => this.calculateTotalCost());
     this.rentalContractForm.get('endDate')?.valueChanges.subscribe(() => this.calculateTotalCost());
     this.rentalContractForm.get('insuranceId')?.valueChanges.subscribe(() => this.calculateTotalCost());
   }
   
 
+  // Load the details of the specified vehicle
   loadVehicle(id: number): void {
     this.vehicleService.getVehicle(id).subscribe({
       next: (vehicle: Vehicle) => {
@@ -78,6 +87,7 @@ export class RentalContractEditComponent implements OnInit {
     });
   }
 
+  // Load the list of available insurances
   loadInsurances(): void {
     this.insuranceService.getInsurances().subscribe({
       next: (insurances: Insurance[]) => this.insurances = insurances,
@@ -85,6 +95,7 @@ export class RentalContractEditComponent implements OnInit {
     });
   }
 
+  // Load the details of the rental contract being edited
   loadRentalContract(): void {
     if (this.rentalContractId !== null) {
       this.rentalContractService.getRentalContractById(this.rentalContractId).subscribe({
@@ -97,6 +108,7 @@ export class RentalContractEditComponent implements OnInit {
     }
   }
 
+  // Calculate the total cost of the rental contract based on the form values
   calculateTotalCost(): void {
     const startDate = new Date(this.rentalContractForm.get('startDate')?.value);
     const endDate = new Date(this.rentalContractForm.get('endDate')?.value);
@@ -115,10 +127,12 @@ export class RentalContractEditComponent implements OnInit {
     }
   }
 
+  // Handle form submission
   onSubmit(): void {
     if (this.rentalContractForm.valid) {
       this.rentalContractForm.get('totalCost')?.enable();
 
+      // Create the rental contract object from the form values
       const rentalContract: RentalContract = {
         id: this.rentalContractId ?? 0,  // or make id optional in RentalContract interface
         vehicleId: +this.rentalContractForm.get('vehicleId')?.value,
@@ -136,6 +150,7 @@ export class RentalContractEditComponent implements OnInit {
 
       console.log('Rental Contract Data:', rentalContract); // Log the rental contract data before submission
 
+      // Update the rental contract if editing, otherwise add a new rental contract
       if (this.rentalContractId) {
         this.rentalContractService.updateRentalContract(rentalContract).subscribe({
           next: () => this.router.navigate(['/my-rentals']),
@@ -152,6 +167,7 @@ export class RentalContractEditComponent implements OnInit {
     }
   }
 
+  // Log form errors to the console
   private logFormErrors(): void {
     Object.keys(this.rentalContractForm.controls).forEach(key => {
       const controlErrors = this.rentalContractForm.get(key)?.errors;
