@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service'; // Assuming you have an AuthService
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -8,10 +8,12 @@ import { AuthService } from '../../services/auth.service'; // Assuming you have 
 })
 export class MainLayoutComponent {
   currentUser: any;
+  isAdmin: boolean = false;
 
   constructor(private authService: AuthService) {
     this.authService.currentUser.subscribe(user => {
       this.currentUser = user;
+      this.isAdmin = this.authService.hasRole('Admin');
     });
   }
 

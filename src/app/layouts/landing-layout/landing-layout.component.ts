@@ -2,11 +2,10 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-landing-layout', // Change this to a unique selector
+  selector: 'app-landing-layout', // Unique selector
   templateUrl: './landing-layout.component.html',
   styleUrls: ['./landing-layout.component.css']
 })
-
 export class LandingLayoutComponent implements OnInit {
   isAdmin: boolean = false;
   navbarVisible: boolean = false;  // Controls the visibility of the navbar
@@ -21,8 +20,6 @@ export class LandingLayoutComponent implements OnInit {
 
   ngOnInit() {
     console.log("LandingLayoutComponent is active");
-    // Force visibility for testing
-    this.navbarVisible = false;
   }
 
   @HostListener('window:scroll')
@@ -32,10 +29,8 @@ export class LandingLayoutComponent implements OnInit {
     this.navbarVisible = scrollY > scrollThreshold;
     console.log('Scroll Y:', scrollY, 'Threshold:', scrollThreshold, 'Navbar Visible:', this.navbarVisible);
   }
-  
+
   logout(): void {
     this.authService.logout();
   }
-
-
 }

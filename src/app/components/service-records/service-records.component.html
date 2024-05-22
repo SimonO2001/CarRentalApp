@@ -1,0 +1,32 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Service Records Management</h2>
+    <a class="btn btn-primary mb-3" routerLink="/service-records/add">Add New Service Record</a>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Vehicle ID</th>
+            <th class="text-center">Date of Service</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Cost</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of serviceRecords">
+            <td class="text-center">{{ record.id }}</td>
+            <td class="text-center">{{ record.vehicleId }}</td>
+            <td class="text-center">{{ record.dateOfService | date }}</td>
+            <td class="text-center">{{ record.description }}</td>
+            <td class="text-center">{{ record.cost | currency }}</td>
+            <td class="text-center">
+              <a class="btn btn-info btn-sm" *ngIf="record.id" routerLink="/service-records/edit/{{ record.id }}">Edit</a>
+              <button class="btn btn-danger btn-sm" *ngIf="record.id" (click)="deleteServiceRecord(record.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

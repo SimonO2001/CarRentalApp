@@ -1,0 +1,38 @@
+<!-- src/app/components/service-record/service-record.component.html -->
+<div class="service-records-container">
+  <div *ngIf="vehicle" class="vehicle-info-container">
+    <div class="vehicle-info">
+      <div class="vehicle-image-container">
+        <img [src]="vehicle.imageUrl" alt="Vehicle Image" class="vehicle-image">
+      </div>
+      <div class="vehicle-details">
+        <h3 class="vehicle-make">{{ vehicle.make }}</h3>
+        <div class="separator"></div>
+        <h3 class="vehicle-model">{{ vehicle.model }}</h3>
+        <div class="separator"></div>
+        <h3 class="vehicle-year">{{ vehicle.year }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="service-records-content">
+    <div *ngIf="serviceRecords.length > 0; else noRecords">
+      <h3 class="text-center mb-4">Service Records</h3>
+      <ul class="list-group">
+        <li *ngFor="let record of serviceRecords" class="list-group-item">
+          <div class="record-date">
+            <h5><i class="fas fa-calendar-alt"></i> {{ record.dateOfService | date }}</h5>
+          </div>
+          <div class="record-description">
+            <p>{{ record.description }}</p>
+          </div>
+          <div class="record-cost">
+            <p><i class="fas fa-dollar-sign"></i> Cost: {{ record.cost | currency }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noRecords>
+      <p class="text-center">No service records available for this vehicle.</p>
+    </ng-template>
+  </div>
+</div>

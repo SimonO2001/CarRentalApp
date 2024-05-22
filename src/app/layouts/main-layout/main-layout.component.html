@@ -4,6 +4,7 @@
       <li class="nav-item"><a routerLink="/showroom" class="nav-link">Showroom</a></li>
       <li class="nav-item"><a routerLink="/aboutus" class="nav-link">About Us</a></li>
       <li class="nav-item"><a routerLink="/events" class="nav-link">Events</a></li>
+      <li class="nav-item"><a routerLink="/my-rentals" class="nav-link">My Rentals</a></li>
     </ul>
   </div>
   <div class="navbar-center">
@@ -12,6 +13,9 @@
   <div class="navbar-right">
     <ul class="nav">
       <li class="nav-item" *ngIf="!currentUser"><a routerLink="/login" class="nav-link">Login</a></li>
+      <li class="nav-item" *ngIf="currentUser && isAdmin">
+        <a routerLink="/dashboard" class="nav-link">Admin Dashboard</a>
+      </li>
       <li class="nav-item" *ngIf="currentUser">
         <div class="account-info">
           <a class="nav-link" (click)="logout()">
@@ -25,7 +29,6 @@
     </ul>
   </div>
 </nav>
-
 
 <div>
   <router-outlet></router-outlet>

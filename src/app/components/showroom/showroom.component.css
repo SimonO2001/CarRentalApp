@@ -1,4 +1,3 @@
-/* Base styling for the showroom component */
 .vehicle-list {
     display: flex;
     flex-wrap: wrap;
@@ -35,27 +34,24 @@
     background-color: #222; /* Even darker shade for details section */
 }
 
-h3, p {
+.vehicle-details h3, .vehicle-details h4, p {
     margin: 5px 0; /* Unified margin for all text elements */
 }
 
-/* Error handling for missing images */
-.vehicle-card img[onerror] {
-    content: url('/path-to-default-image/default-image.jpg'); /* Default image when src fails */
+.vehicle-details h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-body {
-    font-family: 'Roboto', sans-serif;
+.vehicle-details h4 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #ccc;
 }
 
-.vehicle-card img {
-    width: 100%;
-    height: 200px; /* Set a fixed height */
-    object-fit: cover; /* Cover ensures the image covers the area, cropping excess parts */
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+.vehicle-details hr {
+    border-color: #444;
+    margin: 10px 0;
 }
 
 .vehicle-details button {
@@ -75,7 +71,7 @@ body {
     background-color: #666;
 }
 
-/* showroom.component.css */
+/* Base styling for the showroom component */
 .showroom-container {
     color: white;
     background-color: #000;

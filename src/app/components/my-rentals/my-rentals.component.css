@@ -1,0 +1,49 @@
+html, body {
+    background-color: #333333;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  h2 {
+    color: #ffffff;
+    margin-top: 20px; /* Optional: add a bit of top margin for spacing */
+  }
+  
+  .container-fluid {
+    padding: 20px;
+    background-color: #333333;
+    min-height: 80vh; /* Ensure the container is at least 100vh tall */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .row {
+    flex: 1; /* Make the row take up the remaining space */
+  }
+  
+  .card {
+    background-color: #1f1f1f;
+    border: 1px solid #444;
+  }
+  
+  .card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+  }
+  

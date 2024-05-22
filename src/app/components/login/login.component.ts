@@ -1,3 +1,4 @@
+// src/app/components/login/login.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -25,17 +26,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // In LoginComponent
   onLogin() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
-          console.log('Attempting to navigate to dashboard');
-          this.router.navigate(['/dashboard']).then(success => {
-            console.log('Navigation success:', success);
-          }).catch(err => {
-            console.log('Navigation error:', err);
-          });
+          console.log('Login successful, navigating to dashboard');
+          this.router.navigate(['/']);
         },
         error: (error) => {
           this.errorMessage = error.error.message || 'Failed to log in, please check your credentials and try again.';

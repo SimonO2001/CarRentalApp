@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service'; // Assuming you have an AuthService
 
 @Component({
   selector: 'app-admin-layout',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin-layout.component.css']
 })
 export class AdminLayoutComponent {
+  currentUser: any;
 
+  constructor(private authService: AuthService) {
+    this.authService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
 }

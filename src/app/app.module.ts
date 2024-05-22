@@ -20,6 +20,11 @@ import { InsuranceFormComponent } from './components/insurance-form/insurance-fo
 import { RentalContractComponent } from './components/rental-contract/rental-contract.component';
 import { InsuranceComponent } from './components/insurance/insurance.component';
 import { RentalContractEditComponent } from './components/rental-contract-edit/rental-contract-edit.component';
+import { ServiceRecordComponent } from './components/service-record/service-record.component';
+import { ServiceRecordsComponent } from './components/service-records/service-records.component';
+import { ServiceRecordEditComponent } from './components/service-record-edit/service-record-edit.component';
+import { RegisterComponent } from './components/register/register.component';
+import { MyRentalsComponent } from './components/my-rentals/my-rentals.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,11 @@ import { RentalContractEditComponent } from './components/rental-contract-edit/r
     RentalContractComponent,
     InsuranceComponent,
     RentalContractEditComponent,
+    ServiceRecordComponent,
+    ServiceRecordsComponent,
+    ServiceRecordEditComponent,
+    RegisterComponent,
+    MyRentalsComponent,
   ],
   imports: [
     BrowserModule,

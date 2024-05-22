@@ -1,11 +1,12 @@
 .navbar {
   background-color: #0f0f0f;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem; /* Increased padding for more height */
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  height: 100px; /* Ensure the navbar is tall enough */
 }
 
 .navbar-left, .navbar-right {
@@ -15,11 +16,18 @@
   flex: 1;
 }
 
+.logo {
+  height: 80px; /* Keep the logo height */
+}
+
 .navbar-center {
   filter: brightness(0) invert(1);
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  height: 100%; /* Ensure the center div is as tall as the navbar */
+  display: flex;
+  align-items: center; /* Vertically center the logo */
 }
 
 .nav {

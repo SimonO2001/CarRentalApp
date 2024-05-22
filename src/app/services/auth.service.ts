@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { Login } from '../models/login.model';
+import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
-import { Customer } from '../models/customer.model';
-
+import { Login } from '../models/login.model';
+import { Register } from '../models/register.model'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7110/Authentication'; // Base API URL
+  private apiUrl = 'https://localhost:7110/Authentication';
+  private customerApiUrl = 'https://localhost:7110/api/Customer'; // Specific endpoint for CustomerController
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+    const storedUser = localStorage.getItem('currentUser');
+    this.currentUserSubject = new BehaviorSubject<any>(storedUser ? JSON.parse(storedUser) : null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -27,18 +28,24 @@ export class AuthService {
   login(credentials: Login): Observable<any> {
     const loginUrl = `${this.apiUrl}/login`;
     return this.http.post<any>(loginUrl, credentials, {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     }).pipe(
       map(response => {
-        console.log('Login response:', response);
-        const decodedToken = jwtDecode(response.token);
-        console.log('Decoded Token:', decodedToken);
-
-        localStorage.setItem('currentUser', JSON.stringify({ token: response.token, decoded: decodedToken }));
-        this.currentUserSubject.next({ token: response.token, decoded: decodedToken });
-
+        const decodedToken: any = jwtDecode(response.token);
+        const user = { token: response.token, decoded: decodedToken, refreshToken: response.refreshToken };
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
         return response;
       }),
+      catchError(this.handleError)
+    );
+  }
+
+  register(registerData: Register): Observable<any> {
+    const registerUrl = `${this.customerApiUrl}/register`; // Use the customer-specific endpoint
+    return this.http.post<any>(registerUrl, registerData, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    }).pipe(
       catchError(this.handleError)
     );
   }
@@ -46,11 +53,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-  }
-
-  public getCurrentUser(): any {
-    const user = localStorage.getItem('currentUser');
-    return user ? JSON.parse(user) : null;
   }
 
   getToken(): string {
@@ -62,10 +64,50 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  hasRole(role: string): boolean {
+  hasRole(roles: string | string[]): boolean {
     const currentUser = this.currentUserSubject.value;
-    const roles = currentUser && currentUser.decoded ? currentUser.decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] : [];
-    return Array.isArray(roles) ? roles.includes(role) : roles === role;
+    const userRoles = currentUser?.decoded?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+    if (!userRoles) {
+      return false;
+    }
+
+    if (typeof roles === 'string') {
+      roles = [roles];
+    }
+
+    if (Array.isArray(userRoles)) {
+      return roles.some(role => userRoles.includes(role));
+    }
+    return roles.includes(userRoles);
+  }
+
+  refreshToken(): Observable<any> {
+    const currentUser = this.currentUserValue;
+    const refreshToken = currentUser ? currentUser.refreshToken : null;
+    if (!refreshToken) {
+      return of(null);
+    }
+
+    return this.http.post<any>(`${this.apiUrl}/refresh-token`, { token: currentUser.token, refreshToken }).pipe(
+      tap(response => {
+        if (response && response.token) {
+          const decodedToken: any = jwtDecode(response.token);
+          const user = { token: response.token, decoded: decodedToken, refreshToken: response.refreshToken };
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+        }
+      }),
+      catchError(error => {
+        this.logout();
+        return throwError(error);
+      })
+    );
+  }
+
+  getUserId(): number | null {
+    const currentUser = this.currentUserValue;
+    return currentUser && currentUser.decoded && currentUser.decoded.userId ? parseInt(currentUser.decoded.userId, 10) : null;
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -77,22 +119,5 @@ export class AuthService {
     }
     console.error(errorMessage);
     return throwError(errorMessage);
-  }
-
-  getUserId(): number | null {
-    const currentUser = this.getCurrentUser();
-    return currentUser && currentUser.decoded && currentUser.decoded.userId ? currentUser.decoded.userId : null;
-  }
-
-  getCustomer(id: number): Observable<any> {
-    return this.http.get<any>(`https://localhost:7110/api/Customer/${id}`, { headers: this.getHeaders() });
-  }
-
-  private getHeaders(): HttpHeaders {
-    const token = this.getToken();
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
   }
 }

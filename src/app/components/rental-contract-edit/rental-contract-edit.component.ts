@@ -46,7 +46,7 @@ export class RentalContractEditComponent implements OnInit {
     console.log('Vehicle ID from URL:', vehicleId);
     this.loadVehicle(vehicleId);
     this.loadInsurances();
-
+  
     if (this.rentalContractId) {
       this.loadRentalContract();
     } else {
@@ -59,11 +59,12 @@ export class RentalContractEditComponent implements OnInit {
         console.error('Failed to get customer ID');
       }
     }
-
+  
     this.rentalContractForm.get('startDate')?.valueChanges.subscribe(() => this.calculateTotalCost());
     this.rentalContractForm.get('endDate')?.valueChanges.subscribe(() => this.calculateTotalCost());
     this.rentalContractForm.get('insuranceId')?.valueChanges.subscribe(() => this.calculateTotalCost());
   }
+  
 
   loadVehicle(id: number): void {
     this.vehicleService.getVehicle(id).subscribe({
@@ -126,29 +127,28 @@ export class RentalContractEditComponent implements OnInit {
         startDate: this.rentalContractForm.get('startDate')?.value,
         endDate: this.rentalContractForm.get('endDate')?.value,
         totalCost: parseFloat(this.rentalContractForm.get('totalCost')?.value),
-        vehicle: this.vehicle!,  // Use non-null assertion operator
-        customer: { id: +this.rentalContractForm.get('customerId')?.value } as Customer, // Fill this properly
-        insurance: { id: +this.rentalContractForm.get('insuranceId')?.value } as Insurance // Fill this properly
+        vehicle: this.vehicle!,
+        customer: { id: +this.rentalContractForm.get('customerId')?.value } as Customer,
+        insurance: { id: +this.rentalContractForm.get('insuranceId')?.value } as Insurance
       };
 
       this.rentalContractForm.get('totalCost')?.disable();
 
-      console.log('Rental Contract Data:', rentalContract);
+      console.log('Rental Contract Data:', rentalContract); // Log the rental contract data before submission
 
       if (this.rentalContractId) {
         this.rentalContractService.updateRentalContract(rentalContract).subscribe({
-          next: () => this.router.navigate(['/rental-contracts']),
+          next: () => this.router.navigate(['/my-rentals']),
           error: (err: any) => console.error('Failed to update rental contract:', err)
         });
       } else {
         this.rentalContractService.addRentalContract(rentalContract).subscribe({
-          next: () => this.router.navigate(['/rental-contracts']),
+          next: () => this.router.navigate(['/my-rentals']),
           error: (err: any) => console.error('Failed to add rental contract:', err)
         });
       }
     } else {
       this.logFormErrors();
-      console.error('Form is invalid');
     }
   }
 

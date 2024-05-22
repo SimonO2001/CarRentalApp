@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <h2 class="mb-4 text-center text-white">My Rental Contracts</h2>
+    <div class="row" *ngIf="rentalContracts.length > 0; else noContracts">
+      <div class="col-md-4 mb-4" *ngFor="let rentalContract of rentalContracts">
+        <div class="card bg-dark text-white">
+          <img *ngIf="rentalContract.vehicle?.imageUrl" [src]="rentalContract.vehicle?.imageUrl" class="card-img-top" alt="Vehicle Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ rentalContract.vehicle?.make }} {{ rentalContract.vehicle?.model }}</h5>
+            <p class="card-text">
+              <strong>ID:</strong> {{ rentalContract.id }}<br>
+              <strong>Start Date:</strong> {{ rentalContract.startDate | date }}<br>
+              <strong>End Date:</strong> {{ rentalContract.endDate | date }}<br>
+              <strong>Total Cost:</strong> {{ rentalContract.totalCost | currency }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noContracts>
+      <p class="text-center text-white">You have no current rental contracts.</p>
+    </ng-template>
+  </div>
+  

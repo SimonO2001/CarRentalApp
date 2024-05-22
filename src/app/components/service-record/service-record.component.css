@@ -1,0 +1,106 @@
+/* src/app/components/service-record/service-record.component.css */
+.service-records-container {
+    padding: 20px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    min-height: 100vh; /* Ensure container fits the entire screen height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to the top */
+  }
+  
+  .vehicle-info-container {
+    display: flex;
+    justify-content: center; /* Center the vehicle info container */
+  }
+  
+  .vehicle-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 2px solid #535252; /* Slightly different border to distinguish it */
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #252525; /* Darker background color */
+  }
+  
+  .vehicle-image-container {
+    flex: 0 0 auto;
+    width: 400px; /* Fixed width for the image container */
+    margin-right: 20px;
+  }
+  
+  .vehicle-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Rounded corners for the image */
+  }
+  
+  .vehicle-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Center the text */
+  }
+  
+  .vehicle-make, .vehicle-model, .vehicle-year {
+    font-size: 4.9em; /* Adjusted font size */
+    color: #ffffff;
+    margin: 0;
+  }
+  
+  .separator {
+    width: 100%; /* Width matching the text length */
+    border-top: 2px solid #666; /* Add a top border */
+    margin: 10px 0; /* Add margin for spacing */
+  }
+  
+  .service-records-content {
+    flex: 1; /* Take the remaining space */
+  }
+  
+  .list-group-item {
+    background-color: #2c2c2c;
+    border: 1px solid #444; /* Add border for the items */
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .list-group-item h5 {
+    margin: 0;
+    color: #ffffff;
+  }
+  
+  .record-description p, .record-cost p {
+    color: #ffffff; /* Set text color to white */
+    white-space: pre-wrap; /* Allows text to wrap and respect new lines */
+    word-wrap: break-word; /* Breaks long words if necessary */
+    margin: 10px 0;
+  }
+  
+  .record-cost p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .record-date, .record-description, .record-cost {
+    margin-bottom: 10px;
+  }
+  
+  .fas {
+    margin-right: 8px;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  @media (min-width: 768px) {
+    .record-description p {
+      font-size: 1.1em;
+    }
+  }
+  

@@ -34,4 +34,10 @@ export class VehicleDetailsComponent implements OnInit {
       this.router.navigate(['/rental-contracts/add'], { queryParams: { vehicleId: this.vehicle.id } });
     }
   }
+
+  navigateToServiceRecords(): void {
+    if (this.vehicle) {
+      this.router.navigate([`/vehicles/details/${this.vehicle.id}/service-records`]);
+    }
+  }
 }

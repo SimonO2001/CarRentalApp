@@ -12,6 +12,9 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/events" [routerLinkActive]="['active']">Events</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/my-rentals" [routerLinkActive]="['active']">My Rentals</a>
+                </li>
             </ul>
         </div>
         
@@ -26,6 +29,9 @@
         <div class="navbar-right collapse navbar-collapse" id="navbarNavRight">
             <ul class="nav">
                 <li class="nav-item" *ngIf="!currentUser"><a class="nav-link" routerLink="/login">Login</a></li>
+                <li class="nav-item" *ngIf="currentUser && isAdmin">
+                    <a class="nav-link" routerLink="/dashboard">Admin Dashboard</a>
+                </li>
                 <li class="nav-item" *ngIf="currentUser">
                   <div class="account-info">
                     <a class="nav-link" (click)="logout()">
